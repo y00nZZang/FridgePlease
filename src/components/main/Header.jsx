@@ -1,7 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import Toolbar from '@mui/material/Toolbar';
-import Link from '@mui/material/Link';
 import { Fab } from '@mui/material';
 
 function Header(props) {
@@ -18,19 +17,18 @@ function Header(props) {
       }}
     >
       {sections.map(section => (
-        <Link
-          color="inherit"
-          noWrap
-          href={section.url}
-          sx={{ p: 1, flexShrink: 0 }}
+        <Fab
+          variant="extended"
+          sx={{
+            p: 1,
+            flexShrink: 0,
+            backgroundColor: section.color,
+            paddingX: '50px',
+            marginX: '10px',
+          }}
         >
-          <Fab
-            variant="extended"
-            sx={{ p: 1, flexShrink: 0, backgroundColor: section.color }}
-          >
-            {section.title}
-          </Fab>
-        </Link>
+          {section.title}
+        </Fab>
       ))}
     </Toolbar>
   );
