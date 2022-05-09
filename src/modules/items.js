@@ -1,13 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-import { register } from '../lib/api/auth';
+import { initializeItem } from '../lib/api/item';
 
-export const registerUser = createAsyncThunk(
-  'users/registerUser',
-  async ({ name, id, passwd }, thunkAPI) => {
+export const getItems = createAsyncThunk(
+  'items/getItems',
+  async ({ id }, thunkAPI) => {
     try {
-      const response = await register({ name, id, passwd });
-      console.log(response);
+      console.log(id);
+      const response = await initializeItem({ id });
       return response.data;
       /*
       const { data } = response;
@@ -27,21 +27,18 @@ export const registerUser = createAsyncThunk(
 
 export const clearState = () => {};
 
-export const userSlice = createSlice({
-  name: 'users',
-  initialState: {
-    name: '',
-    id: '',
-  },
+export const itemSlice = createSlice({
+  name: 'items',
+  initialState: {},
   reducers: {
+    itemList: [],
     // Reducer comes here
   },
   extraReducers: builder => {
-    builder.addCase(registerUser.fulfilled, (state, action) => {
-      state.name = action.payload.name;
-      state.id = action.payload.id;
+    builder.addCase(getItems.fulfilled, (state, action) => {
+      state.itemList.append(action.payload);
     });
   },
 });
 
-export const userSelector = state => state.user;
+export const userSelector = state => state.item;

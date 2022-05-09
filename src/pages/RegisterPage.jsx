@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -11,35 +12,39 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 
-import { registerUser } from '../modules/user';
+import { registerUser, userSelector } from '../modules/user';
 
 function RegisterPage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const { control, handleSubmit } = useForm({
+  const { control, handleSubmit, reset } = useForm({
     defaultValues: {
       name: '',
       id: '',
       passwd: '',
     },
   });
-  // const { isSuccess, isError, errorMessage } = useSelector(userSelector);
 
-  const onSubmit = async data => {
-    await dispatch(registerUser(data));
+  const { isSuccess, isError, errorMessage } = useSelector(userSelector);
+
+  const onSubmit = data => {
+    dispatch(registerUser(data));
   };
 
-  /*
   useEffect(() => {
     if (isSuccess) {
-      dispatch(clearState());
+      navigate('/');
     }
     if (isError) {
       console.error(errorMessage);
-      dispatch(clearState());
+      reset({
+        name: '',
+        id: '',
+        passwd: '',
+      });
     }
   }, [isSuccess, isError]);
-  */
 
   return (
     <Container component="main" maxWidth="xs">

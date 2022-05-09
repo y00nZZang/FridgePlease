@@ -7,16 +7,13 @@ export const registerUser = createAsyncThunk(
   async ({ name, id, passwd }, thunkAPI) => {
     try {
       const response = await register({ name, id, passwd });
-      return response.data;
-      /*
       const { data } = response;
       console.log('data', data);
       if (response.status === 200) {
         // localStorage.setItem('token', data.token);
-        return { ...data, username: name, email };
+        return { ...data };
       }
       return thunkAPI.rejectWithValue(data);
-      */
     } catch (e) {
       console.log('Error', e.response.data);
       return thunkAPI.rejectWithValue(e.response.data);
@@ -29,16 +26,13 @@ export const loginUser = createAsyncThunk(
   async ({ id, passwd }, thunkAPI) => {
     try {
       const response = await login({ id, passwd });
-      return response.data;
-      /*
       const { data } = response;
       console.log('data', data);
       if (response.status === 200) {
         // localStorage.setItem('token', data.token);
-        return { ...data, username: name, email };
+        return { ...data };
       }
       return thunkAPI.rejectWithValue(data);
-      */
     } catch (e) {
       console.log('Error', e.response.data);
       return thunkAPI.rejectWithValue(e.response.data);
@@ -46,27 +40,48 @@ export const loginUser = createAsyncThunk(
   },
 );
 
-export const clearState = () => {};
-
 export const userSlice = createSlice({
   name: 'users',
   initialState: {
     name: '',
     id: '',
+    isFetching: false,
+    isSuccess: false,
+    isError: false,
+    errorMessage: '',
   },
   reducers: {
     // Reducer comes here
   },
-  extraReducers: builder => {
-    builder
-      .addCase(registerUser.fulfilled, (state, action) => {
-        state.name = action.payload.name;
-        state.id = action.payload.id;
-      })
-      .addCase(loginUser.fulfilled, (state, action) => {
-        state.name = action.payload.name;
-        state.id = action.payload.id;
-      });
+  extraReducers: {
+    [registerUser.fulfilled]: (state, { payload }) => {
+      state.isFetching = false;
+      state.isSuccess = true;
+      state.name = payload.user.name;
+      state.id = payload.user.id;
+    },
+    [registerUser.pending]: state => {
+      state.isFetching = true;
+    },
+    [registerUser.rejected]: (state, { payload }) => {
+      state.isFetching = false;
+      state.isError = true;
+      state.errorMessage = payload.message;
+    },
+    [loginUser.fulfilled]: (state, { payload }) => {
+      state.isFetching = false;
+      state.isSuccess = true;
+      state.name = payload.user.name;
+      state.id = payload.user.id;
+    },
+    [loginUser.pending]: state => {
+      state.isFetching = true;
+    },
+    [loginUser.rejected]: (state, { payload }) => {
+      state.isFetching = false;
+      state.isError = true;
+      state.errorMessage = payload.message;
+    },
   },
 });
 
