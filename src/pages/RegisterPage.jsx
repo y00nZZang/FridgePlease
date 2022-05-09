@@ -55,7 +55,7 @@ function RegisterPage() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Register
+          회원가입
         </Typography>
         <Box
           component="form"
@@ -74,7 +74,7 @@ function RegisterPage() {
                     required
                     fullWidth
                     id="name"
-                    label="Name"
+                    label="이름"
                     name="name"
                     autoFocus
                   />
@@ -91,7 +91,7 @@ function RegisterPage() {
                     required
                     fullWidth
                     id="id"
-                    label="Id"
+                    label="아이디"
                     name="email"
                   />
                 )}
@@ -107,7 +107,7 @@ function RegisterPage() {
                     required
                     fullWidth
                     id="passwd"
-                    label="Password"
+                    label="비밀번호"
                   />
                 )}
               />
@@ -119,7 +119,7 @@ function RegisterPage() {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Register
+            회원가입
           </Button>
         </Box>
       </Box>

@@ -11,6 +11,22 @@ const preloadedState = {
     name: '',
     id: '',
   },
+  items: [
+    {
+      key: '',
+      name: '',
+      mfgDate: '',
+      expDate: '',
+      category: '',
+      subCategory: '',
+      countable: true,
+      frozen: false,
+      totalVol: null,
+      curVol: null,
+      memo: '',
+      imgSrc: '',
+    },
+  ],
 };
 
 export default configureStore({
