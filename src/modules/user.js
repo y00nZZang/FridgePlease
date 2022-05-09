@@ -27,7 +27,6 @@ export const loginUser = createAsyncThunk(
     try {
       const response = await login({ id, passwd });
       const { data } = response;
-      console.log('data', data);
       if (response.status === 200) {
         // localStorage.setItem('token', data.token);
         return { ...data };

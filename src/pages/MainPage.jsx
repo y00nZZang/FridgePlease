@@ -1,18 +1,22 @@
-import React from 'react';
-// import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-import MainTemplate from '../components/main/MainTemplate';
+import { initItmeLists } from '../modules/items';
 
 function MainPage() {
-  /*
-  const user = useSelector(state => state.userAuth);
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.user);
+  const items = useSelector(state => state.items);
 
   useEffect(() => {
-    console.log(user);
-  });
-  */
+    dispatch(initItmeLists(user.id));
+  }, [dispatch]);
 
-  return <MainTemplate />;
+  useEffect(() => {
+    console.log(items.itemList);
+  }, [items]);
+
+  return <> Hello {user.name}! </>;
 }
 
 export default MainPage;

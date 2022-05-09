@@ -37,7 +37,7 @@ function RegisterPage() {
       navigate('/');
     }
     if (isError) {
-      console.error(errorMessage);
+      if (errorMessage) console.error(errorMessage);
       reset({
         name: '',
         id: '',

@@ -1,10 +1,10 @@
 import axios from 'axios';
 
 /*
-req: id, passwd
-res: id: [user의 id값], name: [user 성명]
+req: id
+res: [item] 해당 id의 item 전체 list
 */
-export const initializeItem = async ({ id }) =>
+export const getItemLists = async ({ id }) =>
   axios.post('/items', { id });
 
 /*

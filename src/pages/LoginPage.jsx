@@ -11,6 +11,7 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import Link from '@mui/material/Link';
 
 import { loginUser, userSelector } from '../modules/user';
 
@@ -35,7 +36,7 @@ function LoginPage() {
       navigate('/');
     }
     if (isError) {
-      console.error(errorMessage);
+      if (errorMessage) console.error(errorMessage);
       reset({
         id: '',
         passwd: '',
@@ -105,6 +106,11 @@ function LoginPage() {
           >
             로그인
           </Button>
+          <Grid item sx={{ float: 'right', p: 1 }}>
+            <Link href="/register" variant="body2">
+              회원가입
+            </Link>
+          </Grid>
         </Box>
       </Box>
     </Container>
