@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Header from '../components/public/Header';
 import PriorItemList from '../components/main/PriorItemList';
 import SearchBar from '../components/main/SearchBar';
+import Menu from '../components/main/Menu';
 
 import { userSelector } from '../modules/user';
 import { initItmeLists, itemSelector } from '../modules/items';
@@ -23,6 +24,7 @@ function MainPage() {
       <Header title="" type="main" />
       {isSuccess && <PriorItemList itemList={itemList} />}
       <SearchBar />
+      <Menu />
     </>
   );
 }
