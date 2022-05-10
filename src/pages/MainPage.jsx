@@ -3,7 +3,8 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Header from '../components/public/Header';
-import ExpiredItemList from '../components/main/ExpiredItemList';
+import PriorItemList from '../components/main/PriorItemList';
+import SearchBar from '../components/main/SearchBar';
 
 import { userSelector } from '../modules/user';
 import { initItmeLists, itemSelector } from '../modules/items';
@@ -20,7 +21,8 @@ function MainPage() {
   return (
     <>
       <Header title="" type="main" />
-      {isSuccess && <ExpiredItemList itemList={itemList} />}
+      {isSuccess && <PriorItemList itemList={itemList} />}
+      <SearchBar />
     </>
   );
 }

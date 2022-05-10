@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Toolbar from '@mui/material/Toolbar';
 import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -25,9 +25,11 @@ function Header(props) {
       >
         {title}
       </Typography>
-      <IconButton>
-        <SearchIcon />
-      </IconButton>
+      {type !== 'main' && (
+        <IconButton>
+          <SearchIcon />
+        </IconButton>
+      )}
     </Toolbar>
   );
 }

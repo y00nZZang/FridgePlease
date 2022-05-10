@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Box } from '@mui/material';
 
-function ExpiredItemList(props) {
+import Box from '@mui/material/Box';
+
+import PriorItem from './PriorItem';
+
+function PriorItemList(props) {
   const { itemList } = props;
 
   const [expiredItems, setExpiredItems] = useState([]);
@@ -22,11 +25,25 @@ function ExpiredItemList(props) {
     console.log('거의 다 소모', scarceItems);
   }, [expiredItems, scarceItems]);
 
-  return <Box />;
+  // key value 수정 필요
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        flexWrap: 'nowrap',
+        overflowX: 'scroll',
+        marginTop: 1,
+      }}
+    >
+      {expiredItems.map((item, index) => (
+        <PriorItem key={index} item={item} type="expired" />
+      ))}
+    </Box>
+  );
 }
 
-ExpiredItemList.propTypes = {
+PriorItemList.propTypes = {
   itemList: PropTypes.array.isRequired,
 };
 
-export default ExpiredItemList;
+export default PriorItemList;
