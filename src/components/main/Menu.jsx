@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import { green, orange, red, blue } from '@mui/material/colors';
@@ -7,8 +8,8 @@ function Menu() {
   return (
     <Grid
       container
-      rowSpacing={2}
-      columnSpacing={2}
+      rowSpacing={1}
+      columnSpacing={1}
       sx={{ height: '20vh', p: 1 }}
     >
       <Grid item xs={6}>

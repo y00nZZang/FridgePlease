@@ -49,18 +49,46 @@ const category = {
         name: '닭고기',
       },
     },
-    dairy: {
-      name: '유제품',
-      img: '/categoryIcon/7.jpg',
-      subCategory: {
-        milk: {
-          name: '우유',
-        },
-        yogurt: {
-          name: '요거트',
-        },
+  },
+  cat4: {
+    name: '4',
+    img: '/categoryIcon/4.jpg',
+  },
+  cat5: {
+    name: '5',
+    img: '/categoryIcon/5.jpg',
+  },
+  cat6: {
+    name: '6',
+    img: '/categoryIcon/6.jpg',
+  },
+  dairy: {
+    name: '유제품',
+    img: '/categoryIcon/7.jpg',
+    subCategory: {
+      milk: {
+        name: '우유',
+      },
+      yogurt: {
+        name: '요거트',
       },
     },
+  },
+  cat8: {
+    name: '8',
+    img: '/categoryIcon/8.jpg',
+  },
+  cat9: {
+    name: '9',
+    img: '/categoryIcon/9.jpg',
+  },
+  cat10: {
+    name: '10',
+    img: '/categoryIcon/10.jpg',
+  },
+  cat11: {
+    name: '11',
+    img: '/categoryIcon/11.jpg',
   },
 };
 

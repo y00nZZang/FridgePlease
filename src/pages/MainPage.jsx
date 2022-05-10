@@ -6,6 +6,8 @@ import Header from '../components/public/Header';
 import PriorItemList from '../components/main/PriorItemList';
 import SearchBar from '../components/main/SearchBar';
 import Menu from '../components/main/Menu';
+import Category from '../components/main/Category';
+import BottomNav from '../components/public/BottomNav';
 
 import { userSelector } from '../modules/user';
 import { initItmeLists, itemSelector } from '../modules/items';
@@ -25,6 +27,8 @@ function MainPage() {
       {isSuccess && <PriorItemList itemList={itemList} />}
       <SearchBar />
       <Menu />
+      <Category />
+      <BottomNav />
     </>
   );
 }
