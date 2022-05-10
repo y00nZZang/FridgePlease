@@ -4,9 +4,9 @@ import { getItemLists } from '../lib/api/item';
 
 export const initItmeLists = createAsyncThunk(
   'items/initItmeLists',
-  async ({ id }, thunkAPI) => {
+  async (id, thunkAPI) => {
     try {
-      const response = await getItemLists({ id });
+      const response = await getItemLists(id);
       const { data } = response;
       if (response.status === 200) {
         return { ...data };
@@ -35,14 +35,23 @@ export const itemSlice = createSlice({
     [initItmeLists.fulfilled]: (state, { payload }) => {
       state.isFetching = false;
       state.isSuccess = true;
-      payload.itemList.forEach(item => {
+      for (const [, item] of Object.entries(payload)) {
         const start = new Date(item.mfgDate);
         const end = new Date(item.expDate);
         const now = Date.now();
         const elapsedRate =
           (end.getTime() - now) / (end.getTime() - start.getTime());
-        state.itemList.push({ ...item, elapsedRate });
-      });
+        const leftDate = Math.ceil(
+          (end.getTime() - now) / (1000 * 60 * 60 * 24),
+        );
+        const consumptionRate = item.curVol / item.totalVol;
+        state.itemList.push({
+          ...item,
+          elapsedRate,
+          leftDate,
+          consumptionRate,
+        });
+      }
     },
     [initItmeLists.pending]: state => {
       state.isFetching = true;
@@ -55,4 +64,4 @@ export const itemSlice = createSlice({
   },
 });
 
-export const itemSelector = state => state.itemList;
+export const itemSelector = state => state.items;
