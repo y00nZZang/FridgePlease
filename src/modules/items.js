@@ -33,6 +33,7 @@ export const itemSlice = createSlice({
   },
   extraReducers: {
     [initItmeLists.fulfilled]: (state, { payload }) => {
+      const tmpList = [];
       state.isFetching = false;
       state.isSuccess = true;
       for (const [, item] of Object.entries(payload)) {
@@ -45,12 +46,13 @@ export const itemSlice = createSlice({
           (end.getTime() - now) / (1000 * 60 * 60 * 24),
         );
         const consumptionRate = item.curVol / item.totalVol;
-        state.itemList.push({
+        tmpList.push({
           ...item,
           elapsedRate,
           leftDate,
           consumptionRate,
         });
+        state.itemList = tmpList;
       }
     },
     [initItmeLists.pending]: state => {
