@@ -1,4 +1,4 @@
-const category = {
+const categorys = {
   vegetable: {
     name: '야채',
     img: '/categoryIcon/0.jpg',
@@ -92,4 +92,4 @@ const category = {
   },
 };
 
-export default category;
+export default categorys;

@@ -7,7 +7,7 @@ import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 
 import { grey } from '@mui/material/colors';
-import category from '../../public/category';
+import categorys from '../../public/category';
 
 function PriorItem(props) {
   const { item, type } = props;
@@ -31,7 +31,7 @@ function PriorItem(props) {
       >
         <Avatar
           sx={{ width: '30vw', height: '30vw', bgcolor: grey[300] }}
-          src={process.env.PUBLIC_URL + category[item.category].img}
+          src={process.env.PUBLIC_URL + categorys[item.category].img}
         />
       </Badge>
       <Box

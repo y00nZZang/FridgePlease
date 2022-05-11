@@ -1,10 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 
-import category from '../../public/category';
+import categorys from '../../public/category';
 
 function Category() {
   return (
@@ -14,10 +15,12 @@ function Category() {
       columnSpacing={1}
       sx={{ height: '30vh', p: 1 }}
     >
-      {Object.entries(category).map(([index, val]) => (
+      {Object.entries(categorys).map(([index, val]) => (
         <Grid item xs={3} key={index}>
           <Button fullWidth sx={{ height: 1 }}>
-            <Avatar src={process.env.PUBLIC_URL + val.img} />
+            <Link to={`/category/${index}`}>
+              <Avatar src={process.env.PUBLIC_URL + val.img} />
+            </Link>
           </Button>
         </Grid>
       ))}

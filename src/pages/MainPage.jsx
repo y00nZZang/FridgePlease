@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -23,7 +22,7 @@ function MainPage() {
 
   return (
     <>
-      <Header title="" type="main" />
+      <Header title=" " type="main" />
       {isSuccess && <PriorItemList itemList={itemList} />}
       <SearchBar />
       <Menu />
