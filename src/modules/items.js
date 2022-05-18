@@ -45,12 +45,12 @@ export const itemSlice = createSlice({
         const leftDate = Math.ceil(
           (end.getTime() - now) / (1000 * 60 * 60 * 24),
         );
-        const consumptionRate = item.curVol / item.totalVol;
+        const curVol = item.totalVol * item.consumptionRate;
         tmpList.push({
           ...item,
           elapsedRate,
           leftDate,
-          consumptionRate,
+          curVol,
         });
         state.itemList = tmpList;
       }
