@@ -12,6 +12,21 @@ import categorys from '../../public/category';
 function PriorItem(props) {
   const { item, type } = props;
 
+  let bgColor;
+  if (type === 'expired') {
+    if (item.leftDate < 3) {
+      bgColor = 'expire10';
+    } else {
+      bgColor = 'expire30';
+    }
+  } else {
+    if (item.consumptionRate < 0.1) {
+      bgColor = 'expire10';
+    } else {
+      bgColor = 'expire30';
+    }
+  }
+
   return (
     <Box sx={{ width: '30vw', height: '40vw', m: 2 }}>
       <Badge
@@ -20,7 +35,7 @@ function PriorItem(props) {
             ? `D${item.leftDate < 0 ? '+' : '-'}${Math.abs(item.leftDate)}`
             : `${item.consumptionRate * 100}%`
         }
-        color="primary"
+        color={bgColor}
         sx={{
           '& .MuiBadge-badge': {
             fontSize: '1.25rem',
@@ -56,6 +71,7 @@ PriorItem.propTypes = {
     name: PropTypes.string.isRequired,
     category: PropTypes.string.isRequired,
     leftDate: PropTypes.number.isRequired,
+    elapsedRate: PropTypes.number.isRequired,
     consumptionRate: PropTypes.number.isRequired,
   }).isRequired,
   type: PropTypes.string.isRequired,

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import PropTypes from 'prop-types';
@@ -21,17 +22,14 @@ function Item(props) {
     item.consumptionRate * 100,
   );
 
-  const [bgColor, setBgColor] = useState('');
-
-  useEffect(() => {
-    if (item.elapsedRate < 0.1) {
-      setBgColor('#ffa19950');
-    } else if (item.elapsedRate < 0.3) {
-      setBgColor('#ffda9950');
-    } else {
-      setBgColor('#d6ffa650');
-    }
-  }, []);
+  let bgColor;
+  if (item.elapsedRate < 0.1) {
+    bgColor = 'expire10';
+  } else if (item.elapsedRate < 0.3) {
+    bgColor = 'expire30';
+  } else {
+    bgColor = 'safe';
+  }
 
   const handleChange = (event, newValue) => {
     setConsumptionRate(newValue);
@@ -51,7 +49,8 @@ function Item(props) {
     >
       <Card
         sx={{
-          backgroundColor: bgColor,
+          bgcolor: `${bgColor}.lighter`,
+          p: 1,
           m: 1,
         }}
       >
@@ -59,7 +58,6 @@ function Item(props) {
           sx={{
             height: '15vh',
             display: 'flex',
-            backgroundColor: bgColor,
           }}
         >
           <CardMedia
@@ -68,7 +66,6 @@ function Item(props) {
             sx={{
               height: '15vh',
               width: '15vh',
-              p: 1,
             }}
           />
           <CardContent
@@ -94,7 +91,7 @@ function Item(props) {
             </Typography>
           </CardContent>
         </Box>
-        <Box sx={{ paddingX: 2 }}>
+        <Box sx={{ paddingX: 1 }}>
           <Slider
             value={consumptionRate}
             onChange={handleChange}
@@ -116,7 +113,6 @@ Item.propTypes = {
     memo: PropTypes.string.isRequired,
     totalVol: PropTypes.number.isRequired,
     curVol: PropTypes.number.isRequired,
-    countable: PropTypes.bool.isRequired,
     elapsedRate: PropTypes.number.isRequired,
     consumptionRate: PropTypes.number.isRequired,
   }).isRequired,
