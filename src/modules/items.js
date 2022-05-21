@@ -1,12 +1,16 @@
+/* eslint-disable no-unused-vars */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-import { getItemLists } from '../lib/api/item';
+import {
+  getItems as getItemsApi,
+  updateItem as updateItemApi,
+} from '../lib/api/item';
 
-export const initItmeLists = createAsyncThunk(
-  'items/initItmeLists',
+export const initItems = createAsyncThunk(
+  'items/initItems',
   async (id, thunkAPI) => {
     try {
-      const response = await getItemLists(id);
+      const response = await getItemsApi(id);
       const { data } = response;
       if (response.status === 200) {
         return { ...data };
@@ -29,10 +33,12 @@ export const itemSlice = createSlice({
     errorMessage: '',
   },
   reducers: {
-    // Reducer comes here
+    updateItemConsumption(state, action) {
+      state.value += action.payload;
+    },
   },
   extraReducers: {
-    [initItmeLists.fulfilled]: (state, { payload }) => {
+    [initItems.fulfilled]: (state, { payload }) => {
       const tmpList = [];
       state.isFetching = false;
       state.isSuccess = true;
@@ -55,15 +61,17 @@ export const itemSlice = createSlice({
         state.itemList = tmpList;
       }
     },
-    [initItmeLists.pending]: state => {
+    [initItems.pending]: state => {
       state.isFetching = true;
     },
-    [initItmeLists.rejected]: (state, { payload }) => {
+    [initItems.rejected]: (state, { payload }) => {
       state.isFetching = false;
       state.isError = true;
       state.errorMessage = payload.message;
     },
   },
 });
+
+export const { updateItemConsumption } = itemSlice.actions;
 
 export const itemSelector = state => state.items;

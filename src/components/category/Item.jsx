@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 import PropTypes from 'prop-types';
 import Typography from '@mui/material/Typography';
@@ -10,13 +11,16 @@ import Slider from '@mui/material/Slider';
 import { Box } from '@mui/material';
 
 import categorys from '../../public/category';
+import { updateItemConsumption } from '../../modules/items';
 
 function Item(props) {
+  const dispatch = useDispatch();
   const { item } = props;
 
   const [consumptionRate, setConsumptionRate] = useState(
     item.consumptionRate * 100,
   );
+
   const [bgColor, setBgColor] = useState('');
 
   useEffect(() => {
@@ -31,6 +35,12 @@ function Item(props) {
 
   const handleChange = (event, newValue) => {
     setConsumptionRate(newValue);
+  };
+
+  const updateConsumptionRate = (event, newValue) => {
+    dispatch(
+      updateItemConsumption({ key: item.key, consumptionRate: newValue }),
+    );
   };
 
   return (
@@ -86,7 +96,11 @@ function Item(props) {
           </CardContent>
         </Box>
         <Box sx={{ paddingX: 2 }}>
-          <Slider value={consumptionRate} onChange={handleChange} />
+          <Slider
+            value={consumptionRate}
+            onChange={handleChange}
+            onChangeCommitted={updateConsumptionRate}
+          />
         </Box>
       </Card>
     </CardActionArea>
@@ -95,6 +109,7 @@ function Item(props) {
 
 Item.propTypes = {
   item: PropTypes.shape({
+    key: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     category: PropTypes.string.isRequired,
     expDate: PropTypes.string.isRequired,

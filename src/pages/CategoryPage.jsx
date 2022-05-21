@@ -4,8 +4,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Box from '@mui/material/Box';
-
 import Header from '../components/public/Header';
 import CategoryBar from '../components/category/CategoryBar';
 import SubCategoryBar from '../components/category/SubCategoryBar';

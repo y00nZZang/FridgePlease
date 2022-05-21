@@ -9,7 +9,7 @@ import Category from '../components/main/Category';
 import BottomNav from '../components/public/BottomNav';
 
 import { userSelector } from '../modules/user';
-import { initItmeLists, itemSelector } from '../modules/items';
+import { initItems, itemSelector } from '../modules/items';
 
 function MainPage() {
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ function MainPage() {
   const { itemList, isSuccess } = useSelector(itemSelector);
 
   useEffect(() => {
-    dispatch(initItmeLists(id));
+    dispatch(initItems(id));
   }, [dispatch]);
 
   return (
