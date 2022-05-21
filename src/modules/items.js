@@ -33,8 +33,13 @@ export const itemSlice = createSlice({
     errorMessage: '',
   },
   reducers: {
-    updateItemConsumption(state, action) {
-      state.value += action.payload;
+    updateItemConsumption(state, { payload }) {
+      const { itemList } = state;
+      const { key, newRate } = payload;
+      console.log(key);
+      const index = itemList.findIndex(item => item.key === key);
+      itemList[index].consumptionRate = newRate;
+      updateItemApi(itemList[index]);
     },
   },
   extraReducers: {
@@ -42,6 +47,7 @@ export const itemSlice = createSlice({
       const tmpList = [];
       state.isFetching = false;
       state.isSuccess = true;
+      console.log(payload);
       for (const [, item] of Object.entries(payload)) {
         const start = new Date(item.mfgDate);
         const end = new Date(item.expDate);

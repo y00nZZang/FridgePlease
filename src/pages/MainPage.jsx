@@ -17,8 +17,10 @@ function MainPage() {
   const { itemList, isSuccess } = useSelector(itemSelector);
 
   useEffect(() => {
-    dispatch(initItems(id));
-  }, [dispatch]);
+    if (!isSuccess) {
+      dispatch(initItems(id));
+    }
+  }, []);
 
   return (
     <>

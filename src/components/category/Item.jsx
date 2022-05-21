@@ -38,9 +38,8 @@ function Item(props) {
   };
 
   const updateConsumptionRate = (event, newValue) => {
-    dispatch(
-      updateItemConsumption({ key: item.key, consumptionRate: newValue }),
-    );
+    const newRate = newValue / 100;
+    dispatch(updateItemConsumption({ key: item.key, newRate }));
   };
 
   return (
