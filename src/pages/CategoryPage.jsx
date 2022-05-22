@@ -4,12 +4,14 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
+import Modal from '@mui/material/Modal';
 import Header from '../components/public/Header';
 import CategoryBar from '../components/category/CategoryBar';
 import SubCategoryBar from '../components/category/SubCategoryBar';
 import Item from '../components/category/Item';
 import BottomNav from '../components/public/BottomNav';
 
+import DetailPage from './DetailPage';
 import { itemSelector } from '../modules/items';
 import categorys from '../public/category';
 
@@ -21,6 +23,11 @@ function CategoryPage() {
   const [processedList, setProcessedList] = useState([]);
   const [sortBy, setSortBy] = useState({ type: 'leftDate', asc: true });
   const [subCategory, setSubCategory] = useState('');
+
+  const [open, setOpen] = useState(false);
+  const [modalItem, setModalItem] = useState();
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     const tmpList = itemList.filter(item => item.category === categoryName);
@@ -80,8 +87,16 @@ function CategoryPage() {
         curCategory={categoryName}
       />
       {processedList.map(item => (
-        <Item key={item.key} item={item} />
+        <Item
+          key={item.key}
+          item={item}
+          setModalItem={setModalItem}
+          handleOpen={handleOpen}
+        />
       ))}
+      <Modal open={open} onClose={handleClose}>
+        <DetailPage item={modalItem} />
+      </Modal>
       <BottomNav />
     </>
   );

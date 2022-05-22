@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -9,14 +8,14 @@ import CardActionArea from '@mui/material/CardActionArea';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Slider from '@mui/material/Slider';
-import { Box } from '@mui/material';
+import Box from '@mui/material/Box';
 
 import categorys from '../../public/category';
 import { updateItemConsumption } from '../../modules/items';
 
 function Item(props) {
   const dispatch = useDispatch();
-  const { item } = props;
+  const { item, setModalItem, handleOpen } = props;
 
   const [consumptionRate, setConsumptionRate] = useState(
     item.consumptionRate * 100,
@@ -43,7 +42,8 @@ function Item(props) {
   return (
     <CardActionArea
       onClick={() => {
-        console.log('clicked');
+        setModalItem(item);
+        handleOpen();
       }}
       sx={{ mb: 1 }}
     >
@@ -116,6 +116,8 @@ Item.propTypes = {
     elapsedRate: PropTypes.number.isRequired,
     consumptionRate: PropTypes.number.isRequired,
   }).isRequired,
+  setModalItem: PropTypes.func.isRequired,
+  handleOpen: PropTypes.func.isRequired,
 };
 
 export default Item;
